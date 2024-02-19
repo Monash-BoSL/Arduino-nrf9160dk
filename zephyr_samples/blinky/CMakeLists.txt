@@ -6,8 +6,6 @@ cmake_path(SET ZephyrBase $ENV{ZEPHYR_BASE})
 set(DTC_OVERLAY_FILE ${ZephyrBase}/../modules/lib/Arduino-Zephyr-API/variants/${BOARD}/${BOARD}.overlay)
 set(ZEPHYR_EXTRA_MODULES ${ZephyrBase}/../modules/lib/Arduino-Zephyr-API)
 
-#message(----------"${ZEPHYR_EXTRA_MODULES}"-----------)
-
 find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
 project(blinky)
 
