@@ -7,6 +7,8 @@ BOLD='\x1b[1m'
 NORMAL='\x1b[0m'
 HIGHLIGHT='\e[30;48;5;41m'
 
+
+
 #-------------------------------------------------------------------------------
 #
 # Check if sourced or not
@@ -22,6 +24,13 @@ fi
 
 #-------------------------------------------------------------------------------
 #
+# Where is this script?
+#
+MY_DIR=$(realpath $(dirname ${BASH_SOURCE}))
+
+
+#-------------------------------------------------------------------------------
+#
 # Setup environment variables
 #
 export ZEPHYR_TOOLCHAIN_VARIANT=zephyr
@@ -32,7 +41,7 @@ export ARDUINO_PATH=${HOME}/AppData/Local/Arduino15
 
 export PATH=$PATH:${ZEPHYR_SDK_INSTALL_DIR}/../bin/Scripts
 
-export $(cat version.def)
+export $(cat ${MY_DIR}/version.def)
 
 echo -e ${GREEN}
 echo The following variables have been set. If this does not match  

@@ -5,3 +5,4 @@
 - v1.0.1		This release enables modem functionality.
 - v1.0.2		Enables debugging. This release is significantly larger than the previous
 				one, but (except debugging) functionally identical.
+- v1.0.3		First public release (bosl.com.au). Build system and debugging improvements.
