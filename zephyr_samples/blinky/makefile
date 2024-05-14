@@ -11,6 +11,9 @@ all:
 	echo -e "$(GREEN)Building Blinky for nrf9160dk_nrf9160$(NORMAL)"
 	west build -b nrf9160dk_nrf9160
 
+k:
+	west build -t guiconfig
+
 prog:
 	nrfjprog --program build/zephyr/zephyr.hex --chiperase --verify --pinreset
 

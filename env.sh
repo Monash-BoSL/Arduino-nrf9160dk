@@ -8,7 +8,6 @@ NORMAL='\x1b[0m'
 HIGHLIGHT='\e[30;48;5;41m'
 
 
-
 #-------------------------------------------------------------------------------
 #
 # Check if sourced or not
@@ -39,7 +38,7 @@ export ZEPHYR_BASE=/c/ncs/v2.5.0/zephyr
 
 export ARDUINO_PATH=${HOME}/AppData/Local/Arduino15
 
-export PATH=$PATH:${ZEPHYR_SDK_INSTALL_DIR}/../bin/Scripts
+export PATH=$PATH:${ZEPHYR_SDK_INSTALL_DIR}/../bin/Scripts/
 
 export $(cat ${MY_DIR}/version.def)
 
