@@ -33,11 +33,16 @@ a:
 	echo -e "$(GREEN)Building modem_at_client$(NORMAL)"
 	$(ARDUINO_CLI_PATH) compile \
 		--output-dir modem_at_client/build \
-		--fqbn bosl:nrf9160:nrf9160dk modem_at_client/modem_at_client.ino
+		--fqbn bosl:nrf9160:nrf9160dk \
+		modem_at_client/modem_at_client.ino
 clean_a:
 	rm -rf modem_at_client/build
 prog_a:
-	nrfjprog --program modem_at_client/build/modem_at_client.ino.hex --chiperase --verify --pinreset
+	nrfjprog \
+		--program modem_at_client/build/modem_at_client.ino.hex \
+		--chiperase \
+		--verify \
+		--pinreset
 
 
 #-------------------------------------------------------------------------------
@@ -45,11 +50,16 @@ b:
 	echo -e "$(GREEN)Building blinky$(NORMAL)"
 	$(ARDUINO_CLI_PATH) compile \
 		--output-dir blinky/build \
-		--fqbn bosl:nrf9160:nrf9160dk blinky/blinky.ino
+		--fqbn bosl:nrf9160:nrf9160dk \
+		blinky/blinky.ino
 clean_b:
 	rm -rf blinky/build
 prog_b:
-	nrfjprog --program blinky/build/blinky.ino.hex --chiperase --verify --pinreset
+	nrfjprog \
+		--program blinky/build/blinky.ino.hex \
+		--chiperase \
+		--verify \
+		--pinreset
 
 
 #-------------------------------------------------------------------------------
@@ -57,11 +67,16 @@ m:
 	echo -e "$(GREEN)Building modem_at_monitor$(NORMAL)"
 	$(ARDUINO_CLI_PATH) compile \
 		--output-dir modem_at_monitor/build \
-		--fqbn bosl:nrf9160:nrf9160dk modem_at_monitor/modem_at_monitor.ino
+		--fqbn bosl:nrf9160:nrf9160dk \
+		modem_at_monitor/modem_at_monitor.ino
 clean_m:
 	rm -rf modem_at_monitor/build
 prog_m:
-	nrfjprog --program modem_at_monitor/build/modem_at_monitor.ino.hex --chiperase --verify --pinreset
+	nrfjprog \
+		--program modem_at_monitor/build/modem_at_monitor.ino.hex \
+		--chiperase \
+		--verify \
+		--pinreset
 
 
 

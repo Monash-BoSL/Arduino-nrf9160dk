@@ -4,3 +4,6 @@
 [submodule "Arduino-Zephyr-API"]
 	path = Arduino-Zephyr-API
 url=https://github.com/Monash-BoSL/Arduino-Zephyr-API
+[submodule "zephyr_samples/BoSL-cam"]
+	path = zephyr_samples/BoSL-cam
+	url = https://github.com/Monash-BoSL/BoSLcam-firmware.git

@@ -4,7 +4,7 @@
 
 #include <Arduino.h>
 
-#define SLEEP_TIME_MS 100
+#define SLEEP_TIME_MS 1000
 
 ////////////////////////////////////////////////////////////////////////////////
 void another_function (void)

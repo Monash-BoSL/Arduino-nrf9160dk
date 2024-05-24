@@ -11,8 +11,11 @@ ifndef ZEPHYR_BASE
 endif
 
 .SILENT:
+.PHONY: build
 
-all:
+all: build
+
+build:
 	cd ${CURDIR}/../.. && ./setup.sh
 	echo -e "$(GREEN)Building AT_Client for nrf9160dk_nrf9160_ns$(NORMAL)"
 	west build -b nrf9160dk_nrf9160_ns

@@ -6,8 +6,11 @@ HIGHLIGHT='\e[30;48;5;41m'
 
 
 .SILENT:
+.PHONY: build
 
-all:
+all: build
+
+build:
 	echo -e "$(GREEN)Building Blinky for nrf9160dk_nrf9160$(NORMAL)"
 	west build -b nrf9160dk_nrf9160
 
