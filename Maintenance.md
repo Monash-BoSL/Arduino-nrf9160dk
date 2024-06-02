@@ -45,15 +45,19 @@ There are makefiles with simple targets scattered throughout this package that c
 
 ## Compilation
 
+From version 1.0.4 this step has largerly been automated by parse_compiler_cmd.py
+
 For successfull compilation, we need to identify all include paths the compiler uses, as well as all the compiler options and defined macros. The best way to do this is to build a zephyr sample, and then look at the command ninja used to compile a c or cpp file. These can be found in the `build/compile_commands.json` once the sample had been built.
 
 All compile macros, options, include files have to be carefully transferred over into `bosl/hardware/nrf9160/x.y.z/platform.txt` into the relevant compiler rules. Also, mk_package has to be updated accordingly in order to ensure all relevant include files are in the package.
 
-From version 1.0.4 this step has been automated by parse_compiler_cmd.py
-
 ## Linking
 
-For successfull linking, we need to identify all libraries and objects included by the linker, as well as all the linker options and defined macros. In the already built zephyr sample, delete `build/zephyr/zephyr.*` and run `ninja --verbose -b keeprsp`.
+For successfull linking, we need to identify all libraries and objects included by the linker, as well as all the linker options and defined macros. In the already built zephyr sample:
+    cd build
+    rm zephyr/zephyr.*
+    ninja --verbose -d keeprsp
+This will display link commands, and also preserve linker command file. 
 
 All link macros, options, and libraries used have to be carefully transferred over into `bosl/hardware/nrf9160/x.y.z/platform.txt` into the relevant linker rules. Also, mk_package has to be updated accordingly in order to ensure all relevant link libraries are in the package. 
 
@@ -63,17 +67,17 @@ Zephyr applications use an unusual linking process, in that they build a prelimi
 
 Additionally, we have to freeze the python script into an exe and add it as a toolchain tool. This is done by mk_package.sh and this can be used as a template for for adding other tools. E.g. mergehex needed for post processing below.
 
-## Post Process
+## Post Link
 
 The linker builds an elf file which has to be transformed into a hex for the programmer to flash the board. This transformation involves several steps which include objcopy, and mergehex. Identifying these steps can be done in the same way as when identifying the link command. 
 
 All steps have to be carefully transferred over into `bosl/hardware/nrf9160/x.y.z/platform.txt` into the relevant elf2hex rules and post objcopy hooks. 
 
-Additionally, the post process steps may include running python scripts (mergehex). The best way to transfer these into arduino is to freeze python scripts into exe files (in mk_package.sh) and distribute as such.
+Additionally, the post process steps may include running python scripts (mergehex). The best way to transfer these into arduino is to freeze python scripts into exe files (alredy done in mk_package.sh) and distribute as such.
 
 ### TODO
 
-A lot of these steps could/should be automated. Especially the recepies for compiling, linking and post processing. Some clues on how to get from zero-to-arduino can be found in `zephyr_samples/at_client/commands`.
+A lot of these steps could/should be automated. Especially the recepies for linking and post processing. Some clues on how to get from zero-to-arduino can be found in `zephyr_samples/at_client/commands`.
 
 
 

@@ -101,13 +101,13 @@ recipe.hooks.linking.prelink.3.pattern.windows=cmd /v /c "@echo off && for /f %a
 
 ################################################################################
 # Link 
-linker.flags=-gdwarf-4 -fuse-ld=bfd -Wl,-Map={build.path}/{build.project_name}.map -Wl,-no-pie -Wl,--orphan-handling=warn -Wl,-u,_ConfigAbsSyms -Wl,-u,_OffsetAbsSyms -DPICOLIBC_DOUBLE_PRINTF_SCANF  -nostdlib -static -Wl,-X -Wl,-N -Wl,--gc-sections -Wl,--build-id=none -Wl,--sort-common=descending -Wl,--sort-section=alignment -mfp16-format=ieee -mabi=aapcs -mthumb -mcpu={build.mcu} --specs=picolibc.specs 
+linker.flags=$$linker_options
 
-linker.precompiled_objects="{libs.path}/empty_file.c.obj" "{libs.path}/offsets.c.obj" "{libs.path}/s_veneers.o"
+linker.precompiled_objects=$$precompiled_objects
 
-linker.whole_archives= "{libs.path}/libzephyr.a" "{libs.path}/libarch__common.a"  "{libs.path}/libarch__arm__core__aarch32.a" "{libs.path}/libarch__arm__core__aarch32__cortex_m.a" "{libs.path}/libarch__arm__core__aarch32__cortex_m__cmse.a"  "{libs.path}/libarch__arm__core__aarch32__mpu.a" "{libs.path}/liblib__libc__picolibc.a" "{libs.path}/liblib__libc__common.a"  "{libs.path}/libsoc__arm__common__cortex_m.a"  "{libs.path}/libboards__arm__nrf9160dk_nrf9160.a" "{libs.path}/libsubsys__random.a" "{libs.path}/libsubsys__net.a" "{libs.path}/libsubsys__net__l2__offloaded_netdev.a" "{libs.path}/libsubsys__net__ip.a" "{libs.path}/libdrivers__adc.a" "{libs.path}/libdrivers__clock_control.a" "{libs.path}/libdrivers__console.a" "{libs.path}/libdrivers__gpio.a" "{libs.path}/libdrivers__i2c.a" "{libs.path}/libdrivers__pinctrl.a" "{libs.path}/libdrivers__serial.a" "{libs.path}/libdrivers__timer.a" "{libs.path}/lib..__nrf__lib__nrf_modem_lib.a" "{libs.path}/lib..__nrf__lib__at_monitor.a" "{libs.path}/lib..__nrf__lib__at_host.a" "{libs.path}/lib..__nrf__lib__fatal_error.a" "{libs.path}/lib..__nrf__lib__modem_antenna.a" "{libs.path}/libtfm_api_nrf.a" "{libs.path}/libtfm_api.a" "{libs.path}/libmodules__hal_nordic__nrfx.a" "{libs.path}/libmodem.a" 
+linker.whole_archives=$$whole_lib_names
 	
-linker.partial_archives="{libs.path}/libkernel.a" "{libs.path}/libisr_tables.a" 
+linker.partial_archives=$$partial_lib_names
 
 #-------------------------------------------------------------------------------
 # Link - 1st pass (<project_name>.pre0.elf)

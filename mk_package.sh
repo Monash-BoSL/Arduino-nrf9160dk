@@ -260,84 +260,16 @@ fi
 #
 # Collect includes
 #
-echo Collecting headers...
-python proc_compiler_cmd.py
-
-
-#-------------------------------------------------------------------------------
-#
-# Archive all libraries to be used for linking
-#
-echo Collecting libraries...
-cd ${SAMPLE_DIR}
-ARCHIVE_PATH=zephyr/libbosl.a
-if [ ! -f ${ARCHIVE_PATH} ]; then
-	${ZEPHYR_SDK_INSTALL_DIR}/arm-zephyr-eabi/bin/arm-zephyr-eabi-ar.exe \
-		qc ${ARCHIVE_PATH} \
-			zephyr/CMakeFiles/zephyr_final.dir/misc/empty_file.c.obj \
-			zephyr/CMakeFiles/offsets.dir/./arch/arm/core/offsets/offsets.c.obj \
-			tfm/secure_fw/s_veneers.o \
-			zephyr/libzephyr.a \
-			zephyr/arch/common/libarch__common.a \
-			zephyr/arch/arch/arm/core/aarch32/libarch__arm__core__aarch32.a \
-			zephyr/arch/arch/arm/core/aarch32/cortex_m/libarch__arm__core__aarch32__cortex_m.a \
-			zephyr/arch/arch/arm/core/aarch32/cortex_m/cmse/libarch__arm__core__aarch32__cortex_m__cmse.a \
-			zephyr/arch/arch/arm/core/aarch32/mpu/libarch__arm__core__aarch32__mpu.a \
-			zephyr/lib/libc/picolibc/liblib__libc__picolibc.a \
-			zephyr/lib/libc/common/liblib__libc__common.a \
-			zephyr/soc/soc/arm/common/cortex_m/libsoc__arm__common__cortex_m.a \
-			zephyr/boards/arm/nrf9160dk_nrf9160/libboards__arm__nrf9160dk_nrf9160.a \
-			zephyr/subsys/random/libsubsys__random.a \
-			zephyr/subsys/net/libsubsys__net.a \
-			zephyr/subsys/net/l2/offloaded_netdev/libsubsys__net__l2__offloaded_netdev.a \
-			zephyr/subsys/net/ip/libsubsys__net__ip.a \
-			zephyr/drivers/adc/libdrivers__adc.a \
-			zephyr/drivers/clock_control/libdrivers__clock_control.a \
-			zephyr/drivers/console/libdrivers__console.a \
-			zephyr/drivers/entropy/libdrivers__entropy.a \
-			zephyr/drivers/gpio/libdrivers__gpio.a \
-			zephyr/drivers/i2c/libdrivers__i2c.a \
-			zephyr/drivers/pinctrl/libdrivers__pinctrl.a \
-			zephyr/drivers/serial/libdrivers__serial.a \
-			zephyr/drivers/timer/libdrivers__timer.a \
-			modules/nrf/lib/nrf_modem_lib/lib..__nrf__lib__nrf_modem_lib.a \
-			modules/nrf/lib/at_monitor/lib..__nrf__lib__at_monitor.a \
-			modules/nrf/lib/at_host/lib..__nrf__lib__at_host.a \
-			modules/nrf/lib/fatal_error/lib..__nrf__lib__fatal_error.a \
-			modules/nrf/lib/modem_antenna/lib..__nrf__lib__modem_antenna.a \
-			modules/nrf/modules/tfm/zephyr/libtfm_api_nrf.a \
-			modules/trusted-firmware-m/libtfm_api.a \
-			modules/hal_nordic/nrfx/libmodules__hal_nordic__nrfx.a \
-			C:/ncs/v2.5.0/nrfxlib/nrf_modem/lib/nRF9160/soft-float/libmodem.a \
-			zephyr/kernel/libkernel.a \
-			zephyr/arch/common/libisr_tables.a 
-	cd - > /dev/null
-fi
+echo Parsing compile command and collecting headers...
+python proc_compile_cmd.py
 
 
 #-------------------------------------------------------------------------------
 #
 # Collect libraries
 #
-DST_DIR=${HARDWARE_DST_DIR}/lib
-if [ ! -d ${DST_DIR} ]; then
-	mkdir -p ${DST_DIR}
-fi
-
-cp --update ${SAMPLE_DIR}/zephyr/linker.cmd				${DST_DIR}
-cp --update ${SAMPLE_DIR}/zephyr/linker_zephyr_pre0.cmd	${DST_DIR}/linker_pre0.cmd
-cp --update ${SAMPLE_DIR}/tfm/bin/tfm_s.hex				${DST_DIR}
-cp --update ${SAMPLE_DIR}/zephyr/tfm_secure.hex			${DST_DIR}
-
-cp --update ${SAMPLE_DIR}/${ARCHIVE_PATH}				${DST_DIR}
-
-if [ ! -f ${DST_DIR}/libkernel.a ]; then
-	cd ${DST_DIR}
-	${ZEPHYR_SDK_INSTALL_DIR}/arm-zephyr-eabi/bin/arm-zephyr-eabi-ar.exe \
-		x libbosl.a
-	rm libbosl.a
-	cd - > /dev/null
-fi
+echo Parsing link command and collecting libraries...
+python proc_link_cmd.py
 
 
 #-------------------------------------------------------------------------------
