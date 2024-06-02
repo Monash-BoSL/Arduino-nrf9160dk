@@ -27,7 +27,7 @@ qclean: clean_samples clean_hardware
 build_arduino:
 	cd arduino_samples && $(MAKE)
 z: setup
-	cd zephyr_samples && $(MAKE) a
+	cd zephyr_samples/BoSL-cam && $(MAKE) build
 z_all: setup
 	cd zephyr_samples && $(MAKE)
 
@@ -45,3 +45,5 @@ clean_local_install:
 	rm -rf ${ARDUINO_PATH}/packages/bosl
 clean: clean_samples clean_package clean_local_install
 
+blinky_test: qpack qcopy 
+	cd arduino_samples && $(MAKE) b prog_b

@@ -258,18 +258,10 @@ fi
 
 #-------------------------------------------------------------------------------
 #
-# Collect includes
+# Parse build commands. Collect headers and libraries
 #
-echo Parsing compile command and collecting headers...
-python proc_compile_cmd.py
-
-
-#-------------------------------------------------------------------------------
-#
-# Collect libraries
-#
-echo Parsing link command and collecting libraries...
-python proc_link_cmd.py
+echo Parsing build commands...
+python proc_build_cmds.py
 
 
 #-------------------------------------------------------------------------------
