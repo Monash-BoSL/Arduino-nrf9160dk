@@ -159,7 +159,6 @@ fi
 mkdir -p ${HARDWARE_DST_DIR}
 cp --update 			templates/*.txt ${HARDWARE_DST_DIR}
 cp --update --recursive templates/cores ${HARDWARE_DST_DIR}
-sed -i -e "s-x_y_z-${BOSL_VERSION}-"	${HARDWARE_DST_DIR}/platform.txt
 
 #-------------------------------------------------------------------------------
 #
@@ -258,68 +257,11 @@ fi
 
 
 #-------------------------------------------------------------------------------
-# Usage: copy_headers <source_directory> <destination> [--recursive]
-function copy_headers() 
-{
-	#echo '   '"$1"
-
-	mkdir -p "$2"
-	cp $3 --update $1 "$2"
-}
-
-
-#-------------------------------------------------------------------------------
 #
 # Collect includes
 #
 echo Collecting headers...
-NRF_PATH=${ZEPHYR_BASE}/../nrf
-NRFXLIB_PATH=${ZEPHYR_BASE}/../nrfxlib
-NRF_MODULES_PATH=${ZEPHYR_BASE}/../modules
-DST_DIR=${HARDWARE_DST_DIR}/inc
-
-# Collect generated headers in one place
-mkdir -p ${SAMPLE_DIR}/generated/zephyr
-mkdir -p ${SAMPLE_DIR}/generated/nrf_security
-mkdir -p ${SAMPLE_DIR}/generated/tfm
-cp --recursive ${SAMPLE_DIR}/zephyr/include/generated/*								${SAMPLE_DIR}/generated/zephyr
-cp --recursive ${SAMPLE_DIR}/modules/nrf/subsys/nrf_security/src/include/generated	${SAMPLE_DIR}/generated/nrf
-cp --recursive ${SAMPLE_DIR}/tfm/generated/interface/include						${SAMPLE_DIR}/generated/tfm
-
-
-# Copy headers 
-copy_headers ${SAMPLE_DIR}/generated 									"${DST_DIR}"									--recursive
-copy_headers ${SAMPLE_DIR}/tfm/install/interface/include				"${DST_DIR}"/tfm/install/interface/include		--recursive
-copy_headers ${MY_DIR}/Arduino-Zephyr-API/cores/arduino					"${DST_DIR}"/Arduino-Zephyr-API/cores			--recursive
-copy_headers ${MY_DIR}/Arduino-Zephyr-API/variants/"*.h"				"${DST_DIR}"/Arduino-Zephyr-API/variants
-copy_headers ${MY_DIR}/Arduino-Zephyr-API/variants/nrf9160dk_nrf9160	"${DST_DIR}"/Arduino-Zephyr-API/variants		--recursive
-copy_headers ${MY_DIR}/Arduino-Zephyr-API/variants/nrf9160dk_nrf9160_ns	"${DST_DIR}"/Arduino-Zephyr-API/variants		--recursive
-copy_headers ${MY_DIR}/Arduino-Zephyr-API/libraries/Wire/"*.h"			"${DST_DIR}"/Arduino-Zephyr-API/libraries/Wire
-copy_headers ${ZEPHYR_BASE}/include										"${DST_DIR}"/zephyr								--recursive
-copy_headers ${ZEPHYR_BASE}/modules/cmsis/"*.h"							"${DST_DIR}"/zephyr/modules/cmsis
-copy_headers ${ZEPHYR_BASE}/modules/hal_nordic/nrfx/"*.h"				"${DST_DIR}"/zephyr/modules/hal_nordic/nrfx
-copy_headers ${ZEPHYR_BASE}/soc/arm/nordic_nrf/nrf91/"*.h"				"${DST_DIR}"/zephyr/soc/arm/nordic_nrf/nrf91
-copy_headers ${ZEPHYR_BASE}/soc/arm/nordic_nrf/common/"*.h"				"${DST_DIR}"/zephyr/soc/arm/nordic_nrf/common
-copy_headers ${ZEPHYR_BASE}/subsys/net/lib/sockets						"${DST_DIR}"/zephyr/subsys/net/lib/sockets		--recursive
-copy_headers ${NRF_PATH}/include/"*.h"									"${DST_DIR}"/nrf/include/
-copy_headers ${NRF_PATH}/include/modem/"*.h"							"${DST_DIR}"/nrf/include/modem
-copy_headers ${NRF_PATH}/include/tfm/"*.h"								"${DST_DIR}"/nrf/include/tfm
-copy_headers ${NRF_PATH}/subsys/nrf_security/include					"${DST_DIR}"/nrf/subsys/nrf_security			--recursive
-copy_headers ${NRFXLIB_PATH}/nrf_modem/include/"*.h"					"${DST_DIR}"/nrfxlib/nrf_modem/include
-copy_headers ${NRF_MODULES_PATH}/hal/cmsis/CMSIS/Core/Include			"${DST_DIR}"/modules/hal/cmsis/CMSIS/Core		--recursive
-copy_headers ${NRF_MODULES_PATH}/hal/nordic/nrfx/"*.h"					"${DST_DIR}"/modules/hal/nordic/nrfx/
-copy_headers ${NRF_MODULES_PATH}/hal/nordic/nrfx/mdk					"${DST_DIR}"/modules/hal/nordic/nrfx			--recursive
-copy_headers ${NRF_MODULES_PATH}/hal/nordic/nrfx/hal					"${DST_DIR}"/modules/hal/nordic/nrfx			--recursive
-copy_headers ${NRF_MODULES_PATH}/hal/nordic/nrfx/haly					"${DST_DIR}"/modules/hal/nordic/nrfx			--recursive
-copy_headers ${NRF_MODULES_PATH}/hal/nordic/nrfx/drivers/"*.h"			"${DST_DIR}"/modules/hal/nordic/nrfx/drivers/
-copy_headers ${NRF_MODULES_PATH}/hal/nordic/nrfx/drivers/include/"*.h"	"${DST_DIR}"/modules/hal/nordic/nrfx/drivers/include
-
-
-find "${DST_DIR}" -type f ! -iname "*.h" -delete
-rm -rf ${SAMPLE_DIR}/generated
-
-
-
+python proc_compiler_cmd.py
 
 
 #-------------------------------------------------------------------------------

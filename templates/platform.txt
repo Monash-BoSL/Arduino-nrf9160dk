@@ -1,4 +1,4 @@
-# Copyright (c) 2023 BoSL.  All right reserved.
+# Copyright (c) 2023-2024 BoSL.  All right reserved.
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -17,7 +17,7 @@
 ################################################################################
 # Arduino nrf9160dk platform.
 name=BOSL Boards
-version=x_y_z
+version=$version
 
 
 ################################################################################
@@ -38,16 +38,16 @@ compiler.elf2bin.cmd=arm-zephyr-eabi-objcopy
 
 ################################################################################
 # Compiler flags
-compiler.defines=-DKERNEL -DNRF9160_XXAA -DNRF_SKIP_FICR_NS_COPY_TO_RAM -DNRF_TRUSTZONE_NONSECURE -DPICOLIBC_DOUBLE_PRINTF_SCANF -DTFM_PSA_API -DUSE_PARTITION_MANAGER=1 -D_FORTIFY_SOURCE=1 -D_POSIX_C_SOURCE=200809 -D__LINUX_ERRNO_EXTENSIONS__ -D__PROGRAM_START -D__ZEPHYR__=1 
+compiler.defines=$compiler_defines
 
 compiler.optimization_flags=-Os
 compiler.optimization_flags.release=-Os
 compiler.optimization_flags.debug=-Og -g3
 
-compiler.options=-fno-strict-aliasing {compiler.optimization_flags} -fcheck-new -fno-exceptions -fno-common -g -gdwarf-4 -fno-diagnostics-color -mcpu=cortex-m33 -mthumb -mabi=aapcs -mfp16-format=ieee -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -fno-pic -fno-pie -fno-asynchronous-unwind-tables -ftls-model=local-exec -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -ffunction-sections -fdata-sections --specs=picolibc.specs 
+compiler.options={compiler.optimization_flags} $compiler_options
 
-compiler.c.flags={compiler.defines} {compiler.options}
-compiler.cpp.flags={compiler.c.flags} -std=c++11 -fno-rtti -nostdinc++ 
+compiler.c.flags={compiler.defines} {compiler.options} $c_options
+compiler.cpp.flags={compiler.defines} {compiler.options} $cpp_options 
 
 ################################################################################
 # Compiler include paths
@@ -55,17 +55,15 @@ compiler.include.paths.generated="-I{inc.path}/generated/nrf" "-I{inc.path}/gene
 
 compiler.include.paths.arduino="-I{inc.path}/Arduino-Zephyr-API/cores/arduino" "-I{inc.path}/Arduino-Zephyr-API/variants" "-I{inc.path}/Arduino-Zephyr-API/variants/nrf9160dk_nrf9160" "-I{inc.path}/Arduino-Zephyr-API/variants/nrf9160dk_nrf9160_ns" "-I{inc.path}/Arduino-Zephyr-API/libraries/Wire" 
 
-compiler.include.paths.zephyr="-I{inc.path}/zephyr/include" "-I{inc.path}/zephyr/modules/cmsis" "-I{inc.path}/zephyr/modules/hal_nordic/nrfx" "-I{inc.path}/zephyr/soc/arm/nordic_nrf/common" "-I{inc.path}/zephyr/soc/arm/nordic_nrf/nrf91" "-I{inc.path}/zephyr/subsys/net/lib/sockets" 
+compiler.include.paths.zephyr=$zephyr_paths
 
-compiler.include.paths.nrf="-I{inc.path}/nrf/include" "-I{inc.path}/nrf/include/tfm" "-I{inc.path}/nrf/subsys/nrf_security/include" "-I{inc.path}/nrfxlib/nrf_modem/include" "-I{inc.path}/modules/hal/cmsis/CMSIS/Core/Include" "-I{inc.path}/modules/hal/nordic/nrfx" "-I{inc.path}/modules/hal/nordic/nrfx/drivers/include" "-I{inc.path}/modules/hal/nordic/nrfx/mdk" 
+compiler.include.paths.nrf=$nrf_paths
 
 compiler.include.paths.tfm="-I{inc.path}/tfm/install/interface/include"
 
-compiler.include.paths.system=-isystem "{inc.path}/zephyr/lib/cpp/minimal/include" 
-
 compiler.macros=-imacros "{inc.path}/generated/zephyr/autoconf.h" -imacros "{inc.path}/zephyr/include/zephyr/toolchain/zephyr_stdint.h" 
 
-compiler.cpp.include={compiler.include.paths.generated} {compiler.include.paths.arduino} {compiler.include.paths.zephyr} {compiler.include.paths.nrf} {compiler.include.paths.tfm} {compiler.include.paths.system} {compiler.macros}
+compiler.cpp.include={compiler.include.paths.generated} {compiler.include.paths.arduino} {compiler.include.paths.zephyr} {compiler.include.paths.nrf} {compiler.include.paths.tfm} {compiler.macros}
 
 
 ################################################################################

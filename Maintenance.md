@@ -47,7 +47,9 @@ There are makefiles with simple targets scattered throughout this package that c
 
 For successfull compilation, we need to identify all include paths the compiler uses, as well as all the compiler options and defined macros. The best way to do this is to build a zephyr sample, and then look at the command ninja used to compile a c or cpp file. These can be found in the `build/compile_commands.json` once the sample had been built.
 
-All compile macros, options, include files have to be carefully transferred over into `bosl/hardware/nrf9160/x.y.z/platform.txt` into the relevant compiler rules. Also, mk_package has to be updated accordingly in order to ensure all relevant include files are in the package. 
+All compile macros, options, include files have to be carefully transferred over into `bosl/hardware/nrf9160/x.y.z/platform.txt` into the relevant compiler rules. Also, mk_package has to be updated accordingly in order to ensure all relevant include files are in the package.
+
+From version 1.0.4 this step has been automated by parse_compiler_cmd.py
 
 ## Linking
 

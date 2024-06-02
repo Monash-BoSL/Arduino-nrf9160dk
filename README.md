@@ -30,7 +30,7 @@ Before the BSP can be built, several prerequisites have to be met:
 Quick steps:
 
 1. Open a GitBash shell
-2. `source ./env.sh`
+2. `source env.sh`
 3. `make z`
 4. `make pack`
 5. `make dist`
@@ -39,7 +39,7 @@ See Maintenance.md for details.
 
 ### Testing
 
-Arduino sketches can be created an dtested in Arduino IDE, but a quick way to test the BSP is to run `make build_arduino`.
+Arduino sketches can be created and tested in Arduino IDE, but a quick way to test the BSP is to run `make build_arduino`.
 
 
 ## Distribution
