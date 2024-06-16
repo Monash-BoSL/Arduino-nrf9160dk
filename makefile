@@ -27,7 +27,7 @@ qclean: clean_samples clean_hardware
 build_arduino:
 	cd arduino_samples && $(MAKE)
 z: setup
-	cd zephyr_samples/BoSL-cam && $(MAKE) build
+	cd zephyr_samples/everything && $(MAKE) build
 z_all: setup
 	cd zephyr_samples && $(MAKE)
 

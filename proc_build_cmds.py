@@ -5,7 +5,8 @@ from proc_link_cmd import proc_link_cmd
 if __name__ == "__main__":
 #	BASE_ZEPHYT_SAMPLE = 'blinky'
 #	BASE_ZEPHYT_SAMPLE = 'at_client'
-	BASE_ZEPHYT_SAMPLE = 'BoSL-cam'
+#	BASE_ZEPHYT_SAMPLE = 'BoSL-cam'
+	BASE_ZEPHYT_SAMPLE = 'everything'
 
 	print(f'Building package based on zephyr_sample/{BASE_ZEPHYT_SAMPLE}')
 
