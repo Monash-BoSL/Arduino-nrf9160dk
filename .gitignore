@@ -12,3 +12,4 @@ arduino_samples/arduino-cli.exe
 bosl/
 .vscode/arduino.json
 arm-none-eabi-gdb.exe
+zephyr_samples/everything/arduino_build/
