@@ -17,7 +17,7 @@ all: build
 
 build:
 	cd ${CURDIR}/../.. && ./setup.sh
-	echo -e "$(GREEN)Building ADC Demo for nrf9160dk_nrf9160_ns$(NORMAL)"
+	echo -e "$(GREEN)Building Everything for nrf9160dk_nrf9160_ns$(NORMAL)"
 	west build -b nrf9160dk_nrf9160_ns
 
 k:

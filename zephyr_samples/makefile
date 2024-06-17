@@ -11,7 +11,7 @@ endif
 
 .SILENT:
 
-all: a b c
+all: a b e
 
 
 a:
@@ -20,8 +20,8 @@ a:
 b:
 	cd blinky && $(MAKE)
 
-c:
-	cd adc && $(MAKE)
+e:
+	cd everything && $(MAKE)
 
 clean_a:
 	cd at_client && $(MAKE) clean
@@ -29,7 +29,7 @@ clean_a:
 clean_b:
 	cd blinky && $(MAKE) clean
 
-clean_c:
-	cd adc && $(MAKE) clean
+clean_e:
+	cd everything && $(MAKE) clean
 
-clean: clean_a clean_b clean_c
+clean: clean_a clean_b clean_e
