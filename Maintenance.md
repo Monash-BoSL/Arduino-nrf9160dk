@@ -10,7 +10,7 @@ All tools for building the package are bash scripts. Building has to be done fro
 
     ** STEP 1: source ./env.sh **
 
-Build `zephyr_samples/at_client` project. This is necessary, as we will use libraries created during this process as a basis for Arduino builds.
+Build `zephyr_samples/everything` project. This is necessary, as we will use libraries created during this process as a basis for Arduino builds.
 
     ** STEP 2: make z **
 
@@ -74,10 +74,6 @@ The linker builds an elf file which has to be transformed into a hex for the pro
 All steps have to be carefully transferred over into `bosl/hardware/nrf9160/x.y.z/platform.txt` into the relevant elf2hex rules and post objcopy hooks. 
 
 Additionally, the post process steps may include running python scripts (mergehex). The best way to transfer these into arduino is to freeze python scripts into exe files (alredy done in mk_package.sh) and distribute as such.
-
-### TODO
-
-A lot of these steps could/should be automated. Especially the recepies for linking and post processing. Some clues on how to get from zero-to-arduino can be found in `zephyr_samples/at_client/commands`.
 
 
 

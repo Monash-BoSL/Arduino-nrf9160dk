@@ -225,6 +225,6 @@ def proc_compile_cmd(sample_name: str) -> None:
 
 ################################################################################
 if __name__ == "__main__":
-	proc_compile_cmd('at_client')
 #	proc_compile_cmd('BoSL-cam')
+	proc_compile_cmd('everything')
 

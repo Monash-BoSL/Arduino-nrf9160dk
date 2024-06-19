@@ -3,16 +3,14 @@ from proc_link_cmd import proc_link_cmd
 
 ################################################################################
 if __name__ == "__main__":
-#	BASE_ZEPHYT_SAMPLE = 'blinky'
-#	BASE_ZEPHYT_SAMPLE = 'at_client'
-#	BASE_ZEPHYT_SAMPLE = 'BoSL-cam'
-	BASE_ZEPHYT_SAMPLE = 'everything'
+#	BASE_ZEPHYR_SAMPLE = 'BoSL-cam'
+	BASE_ZEPHYR_SAMPLE = 'everything'
 
-	print(f'Building package based on zephyr_sample/{BASE_ZEPHYT_SAMPLE}')
+	print(f'Building package based on zephyr_sample/{BASE_ZEPHYR_SAMPLE}')
 
 	print(f'    Processing compile command...')
-	proc_compile_cmd(BASE_ZEPHYT_SAMPLE)
+	proc_compile_cmd(BASE_ZEPHYR_SAMPLE)
 
 	print(f'    Processing link command...')
-	proc_link_cmd(BASE_ZEPHYT_SAMPLE)
+	proc_link_cmd(BASE_ZEPHYR_SAMPLE)
 

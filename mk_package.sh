@@ -13,7 +13,7 @@ HIGHLIGHT='\e[30;48;5;41m'
 #
 # This script prepares necessary files for the BoSL Arduino Package using 
 # nFR9160dk board and Nordic 'nRF Connect SDK' which includes Zephyr. The 
-# package relies on a pre-built sample project (zephyr_samples/at_client) 
+# package relies on a pre-built sample project (zephyr_samples/everything) 
 # We collect necessary include files and built libraries, we package them, 
 # so that Arduino can link them together into a working executable.
 #
@@ -67,7 +67,7 @@ MY_DIR=$(realpath $(dirname $0))
 
 DEBUG_SKIP_TOOLS_INSTALL=1				# Debug only. Comment out for deployment
 
-SAMPLE_DIR=${MY_DIR}/zephyr_samples/at_client/build
+SAMPLE_DIR=${MY_DIR}/zephyr_samples/everything/build
 NRFJPROG_SRC_DIR="/c/Program Files/Nordic Semiconductor/nrf-command-line-tools"
 ZEPHYR_BASE="${ZEPHYR_BASE//\\//}"
 
@@ -94,7 +94,7 @@ if [ ! -d "${NRFJPROG_SRC_DIR}" ]; then
 fi
 if [ ! -d "${SAMPLE_DIR}/zephyr/include/generated" ]; then
 	echo -e ${RED}
-	echo  ERROR: Sample project \(zephyr_samples/at_client\) appears not to have been built. 
+	echo  ERROR: Sample project \(zephyr_samples/everything\) appears not to have been built. 
 	echo '       'Please build at_sample project and try again.
 	echo -e ${NORMAL}
 	exit 1

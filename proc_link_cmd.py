@@ -180,5 +180,5 @@ def proc_link_cmd(sample_name: str) -> None:
 
 ################################################################################
 if __name__ == "__main__":
-	proc_link_cmd('at_client')
 #	proc_link_cmd('BoSL-cam')
+	proc_link_cmd('everything')
