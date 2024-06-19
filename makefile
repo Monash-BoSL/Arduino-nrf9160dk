@@ -35,7 +35,6 @@ dist:
 	cd ${CURDIR} && ./mk_dist.sh
 
 clean_samples:
-	cd arduino_samples && $(MAKE) clean
 	cd zephyr_samples  && $(MAKE) clean
 clean_package:
 	rm -rf bosl
